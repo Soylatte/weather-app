@@ -1,5 +1,5 @@
 # weather-app
-build weather app using weather API
+build weather app using weather API to communicate 
 
 # Stacks
 - React.js
