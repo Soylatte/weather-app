@@ -5,7 +5,7 @@ function App() {
   const [data,setData] = useState({});
   const [location,setLocation] = useState('');
 
- const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=18e223077337135dae9e1d2c9296858b`
+ const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=18e223077337135dae9e1d2c9296858b`
 
  const searchLocation = (event) => {
 
@@ -33,29 +33,31 @@ function App() {
     <div className="container">
       <div className="top">
         <div className="location">
-          <p>Seoul</p>
+          <p>{data.name}</p>
           </div>
           <div className="temp">
-            <h1>11℃</h1>
+            {data.main ? <h1>{data.main.temp.toFixed()}℉</h1> : null}
             </div>
             <div className="description">
-              <p>Sunny</p>
+              {data.weather ?<p>{data.weather[0].main}</p> : null}
               </div>
-              <div className="bottom">
-                <div className="feels">
-                  <p className='bold'>8℃</p>
-                  <p>Feels Like</p>
-                </div>
-                <div className="humidity">
-                  <p>57%</p>
-                  <p>Humidity</p>
-                  </div>
-                  <div className="wind">
-                    <p className='bold'>12 MPH</p>
-                    <p>Wind Speed</p>
-                  </div>
+              {data.name != undefined &&
+               <div className="bottom">
+               <div className="feels">
+                 {data.main ? <p className='bold'>{data.main.feels_like.toFixed()}℉</p> : null}
+                 <p>Feels Like</p>
+               </div>
+               <div className="humidity">
+                 {data.main ? <p className='bold'>{data.main.humidity}%</p> : null}
+                 <p>Humidity</p>
+                 </div>
+                 <div className="wind">
+                   {data.main ? <p className='bold'>{data.wind.speed.toFixed()}MPH</p> : null}
+                   <p>Wind Speed</p>
+                 </div>
 
-              </div>
+             </div>
+              }
 
       </div>
 
